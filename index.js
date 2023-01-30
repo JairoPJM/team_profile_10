@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+
 const Manager = require("./lib/Manager.js");
 const Engineer = require("./lib/Engineer.js");
 const Intern = require("./lib/Intern.js");
@@ -56,6 +57,7 @@ function displayOptions() {
         displayEngineer();
       }if((answers.menuChoice==="Finish team")){
         console.log(team,"YAY")
+        finish()
       }
       
     });
@@ -124,3 +126,8 @@ function displayIntern(){
   displayOptions()
 })
 }
+function finish(){
+  fs.writeFile('index.html', team , (err) =>
+  err ? console.log(err) : console.log('Successfully created index.html!')
+);
+};
