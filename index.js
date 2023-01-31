@@ -126,8 +126,28 @@ function displayIntern(){
   displayOptions()
 })
 }
-function finish(){
-  fs.writeFile('index.html', team , (err) =>
-  err ? console.log(err) : console.log('Successfully created index.html!')
-);
-};
+
+
+
+function finish() {
+  let html = '<!DOCTYPE html><html><head><title>Team Profile</title></head><body>';
+  html += '<h1>Team Profile</h1>';
+
+  for (const member of team) {
+    html += `<h2>${member.name} (${member.getRole()})</h2>`;
+    html += `<p>ID: ${member.id}</p>`;
+    html += `<p>Email: ${member.email}</p>`;
+    if (member.getRole() === 'Manager') {
+      html += `<p>Office Number: ${member.officeNumber}</p>`;
+    } else if (member.getRole() === 'Engineer') {
+      html += `<p>GitHub: ${member.github}</p>`;
+    } else if (member.getRole() === 'Intern') {
+      html += `<p>School: ${member.school}</p>`;
+    }
+  }
+
+  html += '</body></html>';
+
+  fs.writeFileSync('team.html', html, 'utf-8');
+  console.log('Team profile generated successfully!');
+}
