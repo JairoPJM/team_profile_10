@@ -130,24 +130,63 @@ function displayIntern(){
 
 
 function finish() {
-  let html = '<!DOCTYPE html><html><head><title>Team Profile</title></head><body>';
-  html += '<h1>Team Profile</h1>';
+  let html = 
+  `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="./style.css">
+      <title>Team Profile</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-dark bg-dark mb-5">
+          <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
+      </nav>
+      <div class="container">
+          <div class="row">
+`;
 
   for (const member of team) {
-    html += `<h2>${member.name} (${member.getRole()})</h2>`;
-    html += `<p>ID: ${member.id}</p>`;
-    html += `<p>Email: ${member.email}</p>`;
+    html +=`<div class="col-4">
+    <div class="card mx-auto" style="width: 18rem">`
+
+    html += `
+    <h5 class="card-header">   ${member.name} <br /><br />(${member.getRole()}) </h5>
+    <ul class="list-group list-group-flush">`;
+    html += `<li class="list-group-item">ID number: ${member.id}</li>`;
+    html += `<li class="list-group-item">Email:<a href="https://${member.email}"> ${member.email}</a></li>`;
+  
+
+
+
     if (member.getRole() === 'Manager') {
-      html += `<p>Office Number: ${member.officeNumber}</p>`;
+      html += ` <li class="list-group-item">Office Number: ${member.officeNumber}</li>
+        </ul>
+      </div>
+    </div>`;
     } else if (member.getRole() === 'Engineer') {
-      html += `<p>GitHub: ${member.github}</p>`;
+      html += `<li class="list-group-item">GitHub: <a href="https://github.com/${member.github}">${member.github}</a></li>
+        </ul>
+      </div>
+    </div>`;
     } else if (member.getRole() === 'Intern') {
-      html += `<p>School: ${member.school}</p>`;
+      html += ` <li class="list-group-item">School: ${member.school}</li>
+        </ul>
+      </div>
+    </div>`;
     }
+   
   }
 
-  html += '</body></html>';
+  html += `  
+      </div>
+    </div>
+  </body>
+</html>`;
 
-  fs.writeFileSync('team.html', html, 'utf-8');
+  fs.writeFileSync('./dist/index.html', html, 'utf-8');
   console.log('Team profile generated successfully!');
 }
