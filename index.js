@@ -157,7 +157,7 @@ function finish() {
     <h5 class="card-header">   ${member.name} <br /><br />(${member.getRole()}) </h5>
     <ul class="list-group list-group-flush">`;
     html += `<li class="list-group-item">ID number: ${member.id}</li>`;
-    html += `<li class="list-group-item">Email:<a href="https://${member.email}"> ${member.email}</a></li>`;
+    html += `<li class="list-group-item">Email:<a href="mailto:${member.email}"> ${member.email}</a></li>`;
   
 
 
